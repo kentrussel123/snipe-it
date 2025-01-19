@@ -32,6 +32,7 @@ vim \
 git \
 cron \
 mysql-client \
+cron \
 gcc \
 make \
 autoconf \
@@ -118,12 +119,7 @@ VOLUME ["/var/lib/snipeit"]
 
 ##### START SERVER
 
-# Remove Supervisor setup
-# Removed copying and configuration of supervisor files
-# Removed supervisor-exit-event-listener as it's no longer needed
-
-# Start Apache directly (instead of using Supervisor)
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["/startup.sh"]
 
 EXPOSE 80
 EXPOSE 443
