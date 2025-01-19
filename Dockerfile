@@ -32,6 +32,7 @@ vim \
 git \
 cron \
 mysql-client \
+supervisor \
 cron \
 gcc \
 make \
@@ -118,6 +119,10 @@ USER root
 VOLUME ["/var/lib/snipeit"]
 
 ##### START SERVER
+
+COPY docker/startup.sh docker/supervisord.conf / 
+COPY docker/supervisor-exit-event-listener /usr/bin/supervisor-exit-event-listener
+RUN chmod +x /startup.sh /usr/bin/supervisor-exit-event-listener
 
 CMD ["/startup.sh"]
 
