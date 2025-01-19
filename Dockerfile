@@ -32,8 +32,6 @@ vim \
 git \
 cron \
 mysql-client \
-supervisor \
-cron \
 gcc \
 make \
 autoconf \
@@ -120,11 +118,12 @@ VOLUME ["/var/lib/snipeit"]
 
 ##### START SERVER
 
-COPY docker/startup.sh docker/supervisord.conf / 
-COPY docker/supervisor-exit-event-listener /usr/bin/supervisor-exit-event-listener
-RUN chmod +x /startup.sh /usr/bin/supervisor-exit-event-listener
+# Remove Supervisor setup
+# Removed copying and configuration of supervisor files
+# Removed supervisor-exit-event-listener as it's no longer needed
 
-CMD ["/startup.sh"]
+# Start Apache directly (instead of using Supervisor)
+CMD ["apache2ctl", "-D", "FOREGROUND"]
 
 EXPOSE 80
 EXPOSE 443
